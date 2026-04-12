@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CSE160 Assignment 1 - Drawing App</title>
+    <style>
+      body {
+        background-color: #e8e8e8;
+        color: #111;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        margin: 0;
+      }
+      canvas {
+        border: 1px solid #999;
+        cursor: crosshair;
+        display: block;
+      }
+      #controls {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .row-label {
+        font-size: 14px;
+        font-weight: bold;
+        min-width: 120px;
+      }
+      .shape-btn {
+        padding: 3px 10px;
+        border: 1px solid #999;
+        background: #f0f0f0;
+        color: #111;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .shape-btn.active {
+        background: #ddd;
+        border-color: #555;
+      }
+      .clear-btn {
+        padding: 3px 10px;
+        background: #f0f0f0;
+        color: #111;
+        border: 1px solid #999;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .slider-group {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+      }
+      input[type="range"] {
+        width: 140px;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="600" height="600">
+      Please use a browser that supports "canvas"
+    </canvas>
+
+    <div id="controls">
+
+      <!-- Clear -->
+      <div class="row">
+        <button class="clear-btn" onclick="clearCanvas()">Clear Canvas</button>
+      </div>
+
+      <!-- Drawing Mode -->
+      <div class="row">
+        <span class="row-label">Drawing Mode:</span>
+      </div>
+      <div class="row">
+        <button class="shape-btn active" id="btn-point"    onclick="setShape('point')">Squares</button>
+        <button class="shape-btn"        id="btn-triangle" onclick="setShape('triangle')">Triangles</button>
+        <button class="shape-btn"        id="btn-circle"   onclick="setShape('circle')">Circles</button>
+      </div>
+
+      <!-- Color -->
+      <div class="row">
+        <span class="row-label">Shape Color:</span>
+      </div>
+      <div class="row">
+        <div class="slider-group">
+          Red <input type="range" id="slider-r" min="0" max="255" value="200" oninput="updateColor()">
+        </div>
+        <div class="slider-group">
+          Green <input type="range" id="slider-g" min="0" max="255" value="100" oninput="updateColor()">
+        </div>
+        <div class="slider-group">
+          Blue <input type="range" id="slider-b" min="0" max="255" value="200" oninput="updateColor()">
+        </div>
+      </div>
+
+      <!-- Size + Segments -->
+      <div class="row">
+        <div class="slider-group">
+          Shape Size: <input type="range" id="slider-size" min="1" max="100" value="10" oninput="updateSize()">
+        </div>
+        <div class="slider-group">
+          (Circles) Segment Count: <input type="range" id="slider-segs" min="3" max="64" value="10" oninput="updateSegs()">
+        </div>
+      </div>
+
+    </div>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="Point.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="asgn1.js"></script>
+  </body>
+</html>
