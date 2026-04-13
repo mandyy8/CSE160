@@ -49,6 +49,17 @@
         background: #ddd;
         border-color: #555;
       }
+      #awesomeness-box {
+        margin-top: 14px;
+        max-width: 600px;
+        background: #fffbe6;
+        border: 1px solid #c8a800;
+        border-radius: 4px;
+        padding: 10px 14px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      #awesomeness-box strong { color: #7a5800; }
       .clear-btn {
         padding: 3px 10px;
         background: #f0f0f0;
@@ -77,9 +88,10 @@
 
     <div id="controls">
 
-      <!-- Clear -->
+      <!-- Clear + Draw Picture -->
       <div class="row">
         <button class="clear-btn" onclick="clearCanvas()">Clear Canvas</button>
+        <button class="clear-btn" onclick="drawPicture()">Draw Picture</button>
       </div>
 
       <!-- Drawing Mode -->
@@ -118,6 +130,38 @@
         </div>
       </div>
 
+      <!-- Symmetry Brush (Awesomeness) -->
+      <div class="row">
+        <span class="row-label">Symmetry Brush:</span>
+      </div>
+      <div class="row">
+        <button class="shape-btn active" id="sym-none" onclick="setSymmetry('none')">Off</button>
+        <button class="shape-btn" id="sym-h" onclick="setSymmetry('horizontal')">↔ Horizontal</button>
+        <button class="shape-btn" id="sym-v" onclick="setSymmetry('vertical')">↕ Vertical</button>
+        <button class="shape-btn" id="sym-4" onclick="setSymmetry('four')">✦ 4-Way</button>
+      </div>
+
+    </div>
+
+    <div id="awesomeness-box">
+      <strong>✦ Awesomeness — Symmetry Brush</strong><br>
+      Choose a symmetry mode before drawing. Every shape you paint is automatically
+      mirrored in real time:<br>
+      &bull; <strong>Horizontal</strong> — mirrors left↔right across the vertical center line.<br>
+      &bull; <strong>Vertical</strong> — mirrors top↔bottom across the horizontal center line.<br>
+      &bull; <strong>4-Way</strong> — mirrors across both axes at once, producing perfect
+      quad-symmetry. Great for mandalas and kaleidoscope patterns!<br>
+      Works with all three shape types (squares, triangles, circles) and persists across
+      clear/draw-picture actions.
+    </div>
+
+    <!-- Reference drawing photo — replace src with your phone photo filename -->
+    <div style="margin-top:16px;">
+      <p style="margin:0 0 4px 0; font-size:13px; font-weight:bold;">Reference Drawing:</p>
+      <img id="reference-photo" src="butterfly_sketch.jpg"
+           alt="Hand-drawn butterfly reference"
+           style="max-width:300px; border:1px solid #999;"
+           onerror="this.style.display='none'">
     </div>
 
     <script src="../lib/webgl-utils.js"></script>
